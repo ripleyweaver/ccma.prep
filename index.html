@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="CCMA Prep">
+<link rel="icon" href="./favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="96x96" href="./favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="48x48" href="./favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#1A1A1A">
+<title>CCMA Prep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=1.0.0">
+</head>
+<body>
+
+<!-- ============ HOME SCREEN ============ -->
+<div id="screen-home" class="screen active">
+  <div class="home-top-row">
+    <div class="home-header">
+      <h1 tabindex="-1">CCMA Prep</h1>
+      <p><span class="header-countdown-number" id="countdown-number">--</span> Days Until Exam</p>
+      <p class="header-date">July 28, 2026</p>
+    </div>
+    <!-- Static aria-label/icon below are a pre-JS fallback only (assumes dark,
+         the more common device default). applyInitialTheme() in app.js
+         corrects this to the real prefers-color-scheme result on every load,
+         before paint, via updateThemeSwitcherUI(). -->
+    <button class="theme-switcher" id="theme-switcher" onclick="cycleThemeMode()" aria-label="Theme: Dark" title="Theme: Dark">
+      <span id="theme-switcher-icon" aria-hidden="true">🌙</span>
+    </button>
+  </div>
+
+  <div class="load-error-banner" id="load-error-banner" style="display:none;">
+    <p>Couldn't load the question bank. Check your connection and try again.</p>
+    <button type="button" onclick="retryLoadQuestions()">Retry</button>
+  </div>
+
+  <div class="empty-bank-banner" id="empty-bank-banner" style="display:none;">
+    <p>Question bank is empty. Add questions to begin studying.</p>
+  </div>
+
+  <div class="quiz-list">
+    <button class="quiz-row" onclick="openLengthPicker('practice', 'Practice Quiz')">
+      <span class="quiz-row-text">
+        <span class="quiz-row-title">Practice Quiz</span>
+        <span class="quiz-row-sub">Weighted mix of all domains</span>
+      </span>
+    </button>
+    <button class="quiz-row" onclick="openLengthPicker('terminology', 'Terminology Quiz')">
+      <span class="quiz-row-text">
+        <span class="quiz-row-title">Terminology Quiz</span>
+        <span class="quiz-row-sub">Prefixes, roots, suffixes &amp; lay terms</span>
+      </span>
+    </button>
+    <button class="quiz-row" onclick="showScreen('domain-picker')">
+      <span class="quiz-row-text">
+        <span class="quiz-row-title">Study by Domain</span>
+        <span class="quiz-row-sub">Pick one domain to focus on</span>
+      </span>
+    </button>
+    <button class="quiz-row" id="missed-btn" onclick="startMissedQuiz()">
+      <span class="quiz-row-text">
+        <span class="quiz-row-title">Missed Questions</span>
+        <span class="quiz-row-sub" id="missed-sub">No missed questions right now</span>
+      </span>
+    </button>
+  </div>
+
+  <button class="view-progress" onclick="showScreen('progress')">View Progress</button>
+
+  <div class="version-tag" id="app-version"></div>
+</div>
+
+<!-- ============ PROGRESS SCREEN ============ -->
+<div id="screen-progress" class="screen">
+  <div class="top-bar">
+    <button class="back-link" onclick="showScreen('home')">← Back</button>
+    <h2 class="app-title" tabindex="-1">Progress</h2>
+    <span class="spacer"></span>
+  </div>
+
+  <div class="section-label">Score by Domain</div>
+  <div class="domain-list" id="domain-score-list"></div>
+
+  <button class="section-toggle" id="recent-attempts-toggle" onclick="toggleRecentAttempts()" aria-expanded="false" aria-controls="recent-attempts-container">
+    <span class="section-label">Recent Attempts</span>
+    <span class="section-toggle-chevron" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    </span>
+  </button>
+  <div id="recent-attempts-container" hidden></div>
+
+  <button class="clear-history-btn" onclick="clearHistory()">Clear History</button>
+</div>
+
+<!-- ============ GENERIC LENGTH PICKER SCREEN (Practice / Terminology / Missed) ============ -->
+<div id="screen-length-picker" class="screen">
+  <div class="top-bar">
+    <button class="back-link" onclick="showScreen('home')">← Back</button>
+    <span class="spacer"></span>
+  </div>
+
+  <h2 class="pick-title" id="length-picker-title" tabindex="-1">Choose Length</h2>
+  <div class="pick-sub" id="length-picker-sub">Randomized every session, weighted to the real exam.</div>
+
+  <div class="length-section">
+    <div class="length-options">
+      <button class="length-btn selected" data-length="25" onclick="selectGenericLength(25, this)">25</button>
+      <button class="length-btn" data-length="100" onclick="selectGenericLength(100, this)">100</button>
+    </div>
+  </div>
+
+  <button class="start-btn" onclick="startGenericQuiz()">Start Quiz</button>
+</div>
+
+<!-- ============ DOMAIN PICKER SCREEN ============ -->
+<div id="screen-domain-picker" class="screen">
+  <div class="top-bar">
+    <button class="back-link" onclick="showScreen('home')">← Back</button>
+    <span class="spacer"></span>
+  </div>
+
+  <h2 class="pick-title" id="domain-picker-title" tabindex="-1">Study by Domain</h2>
+  <div class="pick-sub">Choose a domain to practice.</div>
+
+  <div class="domain-pick-list" id="domain-pick-list"></div>
+
+  <div class="length-section">
+    <div class="length-label">Choose quiz length</div>
+    <div class="length-options">
+      <button class="length-btn selected" data-length="25" onclick="selectLength(25, this)">25</button>
+      <button class="length-btn" data-length="100" onclick="selectLength(100, this)">100</button>
+    </div>
+  </div>
+
+  <button class="start-btn" id="domain-start-btn" disabled onclick="startDomainQuiz()">Start Quiz</button>
+</div>
+
+<!-- ============ QUIZ SCREEN ============ -->
+<div id="screen-quiz" class="screen">
+  <h2 class="sr-only" id="quiz-screen-heading" tabindex="-1">Quiz question</h2>
+  <div class="quiz-header-row">
+    <div class="progress-text" id="quiz-progress-text">01 / 25</div>
+    <button class="quit-btn" onclick="quitQuiz()">Quit</button>
+  </div>
+  <div class="progress-bar-track">
+    <div class="progress-bar-fill" id="quiz-progress-fill"></div>
+  </div>
+
+  <div class="domain-label" id="quiz-domain-label"></div>
+  <div class="question-box" id="quiz-question-text"></div>
+
+  <div class="choices" id="quiz-choices"></div>
+
+  <button class="next-btn" id="quiz-next-btn" style="display:none;" onclick="nextQuestion()">Next Question</button>
+</div>
+
+<!-- ============ RESULTS SCREEN ============ -->
+<div id="screen-results" class="screen">
+  <div class="top-bar">
+    <span class="spacer"></span>
+    <h2 class="app-title" tabindex="-1">Quiz Complete</h2>
+    <span class="spacer"></span>
+  </div>
+
+  <div class="score-box">
+    <div class="score-percent" id="results-percent">--%</div>
+    <div class="score-fraction" id="results-fraction">-- of -- correct</div>
+    <div class="score-quiz-type" id="results-quiz-type">--</div>
+  </div>
+
+  <div class="section-label">Score by Domain</div>
+  <div class="domain-breakdown" id="results-domain-breakdown"></div>
+
+  <div class="action-buttons">
+    <button class="btn-home" onclick="showScreen('home')">Back to Home</button>
+    <button class="btn-progress" onclick="showScreen('progress')">View Progress</button>
+  </div>
+</div>
+
+<script src="app.js?v=1.0.0" defer></script>
+</body>
+</html>

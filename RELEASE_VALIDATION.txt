@@ -1,0 +1,58 @@
+CCMA Prep 1.0.0 Clean Release Validation
+
+Source zip: ccma-prep-main.zip
+Repo root found: /mnt/data/ccma_clean_work/extract/ccma-prep-main
+
+Included files:
+- .gitignore
+- README.md
+- app.js
+- apple-touch-icon.png
+- favicon-16x16.png
+- favicon-32x32.png
+- favicon-48x48.png
+- favicon-96x96.png
+- favicon.ico
+- icon-1024.png
+- icon-192.png
+- icon-512-maskable.png
+- icon-512.png
+- index.html
+- manifest.webmanifest
+- questions.json
+- service-worker.js
+- style.css
+
+Missing optional files:
+- README.md
+- LICENSE
+- 404.html
+
+Missing required files:
+- None
+
+Validation:
+- PASS: app.js contains APP_VERSION 1.0.0
+- PASS: index.html references style.css?v=1.0.0
+- PASS: index.html references app.js?v=1.0.0
+- PASS: service-worker.js uses ccma-prep-v1-0-0
+- PASS: questions.json domain counts match expected counts: {'domain01': 276, 'domain02': 137, 'domain03': 1442, 'domain04': 88, 'domain05': 162, 'domain06': 117, 'domain07': 149, 'terminology': 286}
+- PASS: questions.json total is 2,657
+- PASS: duplicate IDs: 0
+- PASS: wrong choice count: 0
+- PASS: invalid correctIndex: 0
+- PASS: empty explanations: 0
+- PASS: missing required fields: 0
+- PASS: manifest.webmanifest icon references exist
+- PASS: service-worker.js ./ asset references exist in clean folder
+
+Domain counts:
+- domain01: 276
+- domain02: 137
+- domain03: 1442
+- domain04: 88
+- domain05: 162
+- domain06: 117
+- domain07: 149
+- terminology: 286
+- total: 2657
