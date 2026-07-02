@@ -4,7 +4,7 @@
 // ============================================================
 
 const EXAM_DATE = new Date('2026-07-28T00:00:00');
-const APP_VERSION = '1.0.2'; // 1.0.0 = first full release with final question bank.
+const APP_VERSION = '1.0.3'; // 1.0.0 = first full release with final question bank.
 
 // ============================================================
 // UNLOAD PROTECTION
@@ -35,6 +35,19 @@ const DOMAINS = {
   domain05: { name: 'Administrative Assisting', weight: 12 },
   domain06: { name: 'Communication and Customer Service', weight: 12 },
   domain07: { name: 'Medical Law and Ethics', weight: 7 }
+};
+
+// Short UI labels for display in Progress, Results, Domain Picker, and quiz pill.
+// Full names in DOMAINS above are preserved for NHA alignment/validation/reference.
+const DOMAIN_SHORT_LABELS = {
+  domain01: 'Foundational Knowledge & Science',
+  domain02: 'Anatomy & Physiology',
+  domain03: 'Clinical Patient Care',
+  domain04: 'Patient Care & Education',
+  domain05: 'Administrative Assisting',
+  domain06: 'Communication & Customer Service',
+  domain07: 'Medical Law & Ethics',
+  terminology: 'Terminology'
 };
 
 // Pre-computed weighted question counts per quiz length (locked-in spec)
@@ -376,7 +389,7 @@ function renderDomainPicker() {
     const count = (QUESTIONS[key] || []).length;
     const div = document.createElement('div');
     div.className = 'domain-pick' + (count === 0 ? ' empty-domain' : '');
-    div.textContent = DOMAINS[key].name + (count === 0 ? ' — no questions yet' : '');
+    div.textContent = getDomainDisplayName(key) + (count === 0 ? ' — no questions yet' : '');
     if (count > 0) {
       div.onclick = () => selectStudyDomain(key, div);
     }
@@ -623,8 +636,7 @@ function escapeHtml(str) {
 }
 
 function getDomainDisplayName(key) {
-  if (key === 'terminology') return 'Terminology';
-  return DOMAINS[key] ? DOMAINS[key].name : key;
+  return DOMAIN_SHORT_LABELS[key] || (DOMAINS[key] ? DOMAINS[key].name : key);
 }
 
 function selectAnswer(choiceIndex) {
@@ -869,9 +881,9 @@ function renderProgressScreen() {
     row.className = 'domain-row';
     if (totalInDomain > 0) {
       const pct = Math.round((masteredInDomain / totalInDomain) * 100);
-      row.innerHTML = `<span class="domain-name">${DOMAINS[key].name}</span><span class="domain-score">${pct}%</span>`;
+      row.innerHTML = `<span class="domain-name">${getDomainDisplayName(key)}</span><span class="domain-score">${pct}%</span>`;
     } else {
-      row.innerHTML = `<span class="domain-name">${DOMAINS[key].name}</span><span class="domain-score empty">—</span>`;
+      row.innerHTML = `<span class="domain-name">${getDomainDisplayName(key)}</span><span class="domain-score empty">—</span>`;
     }
     listEl.appendChild(row);
   });
@@ -883,9 +895,9 @@ function renderProgressScreen() {
   termRow.className = 'domain-row';
   if (termTotal > 0) {
     const pct = Math.round((termMastered / termTotal) * 100);
-    termRow.innerHTML = `<span class="domain-name">Terminology</span><span class="domain-score">${pct}%</span>`;
+    termRow.innerHTML = `<span class="domain-name">${getDomainDisplayName('terminology')}</span><span class="domain-score">${pct}%</span>`;
   } else {
-    termRow.innerHTML = `<span class="domain-name">Terminology</span><span class="domain-score empty">—</span>`;
+    termRow.innerHTML = `<span class="domain-name">${getDomainDisplayName('terminology')}</span><span class="domain-score empty">—</span>`;
   }
   listEl.appendChild(termRow);
 

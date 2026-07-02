@@ -394,11 +394,11 @@ button {
 }
 .domain-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) 56px;
   align-items: center;
-  gap: 16px;
-  min-height: 72px;
-  padding: 17px 16px;
+  column-gap: 18px;
+  min-height: 64px;
+  padding: 14px 22px;
   border-bottom: 1px solid var(--border);
   font-size: var(--text-base);
 }
@@ -406,12 +406,20 @@ button {
 .domain-name {
   color: var(--ink);
   min-width: 0;
-  white-space: normal;
-  overflow: visible;
-  text-overflow: clip;
-  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
 }
-.domain-score { color: var(--ink2); font-weight: 700; font-variant-numeric: tabular-nums; justify-self: end; white-space: nowrap; }
+.domain-score {
+  justify-self: end;
+  text-align: right;
+  min-width: 56px;
+  white-space: nowrap;
+  color: var(--ink2);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
 .domain-score.empty { color: var(--muted); font-weight: 400; }
 
 .attempt-list {
@@ -459,12 +467,13 @@ button {
 .domain-pick {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 15px 16px;
-  font-size: var(--text-base);
+  border-radius: 18px;
+  padding: 14px 18px;
+  min-height: 64px;
+  font-size: 1.0625rem;
+  line-height: 1.25;
   color: var(--ink);
   display: flex;
-  justify-content: space-between;
   align-items: center;
   cursor: pointer;
   box-shadow: var(--shadow-sm);
