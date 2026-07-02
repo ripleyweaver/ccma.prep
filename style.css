@@ -393,9 +393,11 @@ button {
   overflow: hidden;
 }
 .domain-row {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
+  gap: 16px;
+  min-height: 72px;
   padding: 17px 16px;
   border-bottom: 1px solid var(--border);
   font-size: var(--text-base);
@@ -403,14 +405,13 @@ button {
 .domain-row:last-child { border-bottom: none; }
 .domain-name {
   color: var(--ink);
-  flex: 1 1 auto;
   min-width: 0;
-  padding-right: 12px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  line-height: 1.25;
 }
-.domain-score { color: var(--ink2); font-weight: 700; font-variant-numeric: tabular-nums; }
+.domain-score { color: var(--ink2); font-weight: 700; font-variant-numeric: tabular-nums; justify-self: end; white-space: nowrap; }
 .domain-score.empty { color: var(--muted); font-weight: 400; }
 
 .attempt-list {

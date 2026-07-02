@@ -4,7 +4,7 @@
 // ============================================================
 
 const EXAM_DATE = new Date('2026-07-28T00:00:00');
-const APP_VERSION = '1.0.1'; // 1.0.0 = first full release with final question bank.
+const APP_VERSION = '1.0.2'; // 1.0.0 = first full release with final question bank.
 
 // ============================================================
 // UNLOAD PROTECTION
@@ -687,10 +687,14 @@ function selectAnswer(choiceIndex) {
 // ============================================================
 // MISSED POOL + RECOVERY TRACKING
 // A question enters the missed pool when answered incorrectly.
-// It is removed only after 2 correct answers while in the pool.
-// A wrong answer while in recovery resets its count back to 0.
-// Recovery counts are stored separately in ccma_missed_recovery.
+// It is removed only after MISSED_RECOVERY_REQUIRED correct answers
+// while in the pool. A wrong answer while in recovery resets its
+// count back to 0. Recovery counts are stored separately in
+// ccma_missed_recovery. Existing recovery counts are preserved
+// across this threshold change — a count of 2 now needs 1 more.
 // ============================================================
+const MISSED_RECOVERY_REQUIRED = 3;
+
 function updateMissedPool(questionId, isCorrect) {
   let missed = getStorage(STORAGE_KEYS.missedPool, []);
   let recovery = getStorage(STORAGE_KEYS.missedRecovery, {});
@@ -703,7 +707,7 @@ function updateMissedPool(questionId, isCorrect) {
   } else if (inMissed) {
     // Correct answer while in missed pool: increment recovery count
     recovery[questionId] = (recovery[questionId] || 0) + 1;
-    if (recovery[questionId] >= 2) {
+    if (recovery[questionId] >= MISSED_RECOVERY_REQUIRED) {
       // Graduated — remove from pool and clean up recovery tracking
       missed = missed.filter(id => id !== questionId);
       delete recovery[questionId];
