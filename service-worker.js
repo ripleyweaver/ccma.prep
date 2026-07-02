@@ -1,4 +1,4 @@
-const CACHE_NAME = "ccma-prep-v1-0-3";
+const CACHE_NAME = "ccma-prep-v1-0-4";
 
 const APP_SHELL = [
   "./",

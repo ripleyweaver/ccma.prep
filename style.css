@@ -397,8 +397,8 @@ button {
   grid-template-columns: minmax(0, 1fr) 44px;
   align-items: center;
   column-gap: 14px;
-  min-height: 64px;
-  padding: 14px 22px;
+  min-height: 56px;
+  padding: 0 22px;
   border-bottom: 1px solid var(--border);
   font-size: var(--text-base);
 }
@@ -410,7 +410,7 @@ button {
   overflow: visible;
   text-overflow: clip;
   line-height: 1.2;
-  font-size: 1.0625rem;
+  font-size: 1rem;
 }
 .domain-score {
   justify-self: end;
@@ -418,8 +418,10 @@ button {
   min-width: 44px;
   white-space: nowrap;
   color: var(--ink2);
+  font-size: 1rem;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
+}
 }
 .domain-score.empty { color: var(--muted); font-weight: 400; }
 
