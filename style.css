@@ -689,6 +689,16 @@ button {
   border-radius: var(--r);
   overflow: hidden;
 }
+/* Title-case section label used on Results screen above the domain breakdown */
+.result-section-label {
+  font-family: var(--font-brand);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  color: var(--ink);
+  margin: 24px 0 10px;
+}
 
 .action-buttons { margin-top: 24px; display: flex; flex-direction: column; gap: 10px; }
 .btn-home {
