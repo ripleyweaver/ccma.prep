@@ -394,9 +394,9 @@ button {
 }
 .domain-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 56px;
+  grid-template-columns: minmax(0, 1fr) 44px;
   align-items: center;
-  column-gap: 18px;
+  column-gap: 14px;
   min-height: 64px;
   padding: 14px 22px;
   border-bottom: 1px solid var(--border);
@@ -407,14 +407,15 @@ button {
   color: var(--ink);
   min-width: 0;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow: visible;
+  text-overflow: clip;
   line-height: 1.2;
+  font-size: 1.0625rem;
 }
 .domain-score {
   justify-self: end;
   text-align: right;
-  min-width: 56px;
+  min-width: 44px;
   white-space: nowrap;
   color: var(--ink2);
   font-weight: 800;

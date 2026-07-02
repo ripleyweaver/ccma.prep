@@ -40,12 +40,12 @@ const DOMAINS = {
 // Short UI labels for display in Progress, Results, Domain Picker, and quiz pill.
 // Full names in DOMAINS above are preserved for NHA alignment/validation/reference.
 const DOMAIN_SHORT_LABELS = {
-  domain01: 'Foundational Knowledge & Science',
+  domain01: 'Foundational Knowledge',
   domain02: 'Anatomy & Physiology',
   domain03: 'Clinical Patient Care',
   domain04: 'Patient Care & Education',
   domain05: 'Administrative Assisting',
-  domain06: 'Communication & Customer Service',
+  domain06: 'Communication & Service',
   domain07: 'Medical Law & Ethics',
   terminology: 'Terminology'
 };
