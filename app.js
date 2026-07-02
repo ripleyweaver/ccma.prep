@@ -4,7 +4,7 @@
 // ============================================================
 
 const EXAM_DATE = new Date('2026-07-28T00:00:00');
-const APP_VERSION = '1.0.4'; // 1.0.0 = first full release with final question bank.
+const APP_VERSION = '1.0.5'; // 1.0.0 = first full release with final question bank.
 
 // ============================================================
 // UNLOAD PROTECTION

@@ -376,6 +376,15 @@ button {
 }
 .section-toggle[aria-expanded="true"] { margin-bottom: 16px; }
 .section-toggle .section-label { margin: 0; }
+/* Title-case label used inside section-toggle (Recent Attempts) */
+.toggle-label {
+  font-family: var(--font-brand);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  color: var(--ink);
+}
 .section-toggle-chevron {
   display: inline-flex;
   flex-shrink: 0;
@@ -421,7 +430,6 @@ button {
   font-size: 1rem;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
-}
 }
 .domain-score.empty { color: var(--muted); font-weight: 400; }
 
@@ -470,11 +478,11 @@ button {
 .domain-pick {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 14px 18px;
-  min-height: 64px;
-  font-size: 1.0625rem;
-  line-height: 1.25;
+  border-radius: 16px;
+  padding: 0 18px;
+  min-height: 58px;
+  font-size: 1rem;
+  line-height: 1.2;
   color: var(--ink);
   display: flex;
   align-items: center;

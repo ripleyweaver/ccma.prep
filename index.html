@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=1.0.4">
+<link rel="stylesheet" href="style.css?v=1.0.5">
 </head>
 <body>
 
@@ -84,15 +84,16 @@
 <div id="screen-progress" class="screen">
   <div class="top-bar">
     <button class="back-link" onclick="showScreen('home')">← Back</button>
-    <h2 class="app-title" tabindex="-1">Progress</h2>
     <span class="spacer"></span>
   </div>
 
-  <div class="section-label">Score by Domain</div>
+  <h2 class="pick-title" tabindex="-1">Progress</h2>
+  <div class="pick-sub">Track your scores by domain and review recent attempts.</div>
+
   <div class="domain-list" id="domain-score-list"></div>
 
   <button class="section-toggle" id="recent-attempts-toggle" onclick="toggleRecentAttempts()" aria-expanded="false" aria-controls="recent-attempts-container">
-    <span class="section-label">Recent Attempts</span>
+    <span class="toggle-label">Recent Attempts</span>
     <span class="section-toggle-chevron" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
     </span>
@@ -187,6 +188,6 @@
   </div>
 </div>
 
-<script src="app.js?v=1.0.4" defer></script>
+<script src="app.js?v=1.0.5" defer></script>
 </body>
 </html>
