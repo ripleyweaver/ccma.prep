@@ -4,7 +4,7 @@
 // ============================================================
 
 const EXAM_DATE = new Date('2026-07-28T00:00:00');
-const APP_VERSION = '1.0.0'; // 1.0.0 = first full release with final question bank.
+const APP_VERSION = '1.0.1'; // 1.0.0 = first full release with final question bank.
 
 // ============================================================
 // UNLOAD PROTECTION
@@ -382,16 +382,6 @@ function renderDomainPicker() {
     }
     list.appendChild(div);
   });
-
-  // Terminology appears last in the list
-  const termCount = (QUESTIONS.terminology || []).length;
-  const termDiv = document.createElement('div');
-  termDiv.className = 'domain-pick' + (termCount === 0 ? ' empty-domain' : '');
-  termDiv.textContent = 'Terminology' + (termCount === 0 ? ' — no questions yet' : '');
-  if (termCount > 0) {
-    termDiv.onclick = () => selectStudyDomain('terminology', termDiv);
-  }
-  list.appendChild(termDiv);
 }
 
 function selectStudyDomain(key, el) {
