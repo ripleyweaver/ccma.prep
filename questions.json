@@ -19765,7 +19765,7 @@
         "Release the tourniquet after 2 min.",
         "Activate the safety device before removing the needle."
       ],
-      "correctIndex": 3,
+      "correctIndex": 0,
       "explanation": "Activating the safety device helps prevent needlestick injury when using a butterfly needle set."
     },
     {
@@ -22131,18 +22131,6 @@
       ],
       "correctIndex": 3,
       "explanation": "Applying a Holter monitor is within the medical assistant role; interpreting results is the provider's responsibility."
-    },
-    {
-      "id": "d03f-166",
-      "question": "Which of the following types of artifacts does the tracing above contain?",
-      "choices": [
-        "Wandering baseline",
-        "Somatic tremor",
-        "Alternating current (AC) interference",
-        "Interrupted baseline"
-      ],
-      "correctIndex": 0,
-      "explanation": "A wandering baseline appears as an upward and downward drift of the EKG tracing, often from movement or poor electrode contact."
     },
     {
       "id": "d03f-167",
